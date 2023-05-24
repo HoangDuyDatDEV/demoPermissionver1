@@ -33,4 +33,8 @@ public class FunctionController {
         functionService.deleteFunction(functionId);
         return new ResponseEntity(HttpStatus.OK);
     }
+    @GetMapping(value = {"/getFunction", "/roleName"})
+    public List<Function> getFunctionsByRole(@RequestParam String roleName) {
+        return functionService.findFunctionByRoleName(roleName);
+    }
 }

@@ -40,7 +40,7 @@ public class FunctionService {
     public void deleteFunction(Long FunctionId) {
         functionRepository.deleteById(FunctionId);
     }
-    
+
     public int findCodeFunctionByRole(String role_name, String function_name)
     {
 
@@ -50,5 +50,7 @@ public class FunctionService {
         return  functionRepository.findFunctionCodeByRole(role_name,function_name).getCode();
     }
 
-
+    public List<Function> findFunctionByRoleName(String role_name){
+        return functionRepository.findFunctionByRoleName(role_name);
+    }
 }
