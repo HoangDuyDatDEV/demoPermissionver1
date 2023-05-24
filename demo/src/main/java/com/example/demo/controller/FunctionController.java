@@ -33,5 +33,4 @@ public class FunctionController {
         functionService.deleteFunction(functionId);
         return new ResponseEntity(HttpStatus.OK);
     }
-
 }

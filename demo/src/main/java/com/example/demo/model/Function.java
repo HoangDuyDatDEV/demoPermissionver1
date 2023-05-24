@@ -2,10 +2,7 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -16,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "function")
 public class Function {
     @Id
@@ -24,14 +22,16 @@ public class Function {
     private String name;
     private int code;
     private String url;
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "functions")
-    private Set<Role> RoleSet = new HashSet<>();
 
-    public Function() {
-    }
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JoinTable(name = "role_function",
+            joinColumns = { @JoinColumn(name = "Function_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "Role_ID") })
+    @JsonIgnore
+    private Set<Role> roles = new HashSet<>();
+
+
 
     public Function(long id,String name, int code, String url) {
         this.id=id;

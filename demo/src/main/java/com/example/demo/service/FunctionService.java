@@ -1,25 +1,32 @@
 package com.example.demo.service;
 
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Function;
+import com.example.demo.model.Role;
 import com.example.demo.repository.FunctionRepository;
+import com.example.demo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FunctionService {
    @Autowired
     private FunctionRepository functionRepository;
-    public String saveFunction(Function function) {
-        Function f=new Function(
-                function.getName(),
-                function.getCode(),
-                function.getUrl()
-        );
-
-        functionRepository.save(f);
-        return function.getName();
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private AccountDetailService accountDetailService;
+    public Function saveFunction(Function function) {
+        Set<Role> roles = new HashSet<>();
+        Role role =roleRepository.findByName(accountDetailService.getCurrentUserRole().getName());
+        System.out.println(role);
+        roles.add(role);
+        function.setRoles(roles);
+        return functionRepository.save(function);
     }
 
     public List<Function> getFunctionDetails(Long FunctionId) {
@@ -32,6 +39,15 @@ public class FunctionService {
 
     public void deleteFunction(Long FunctionId) {
         functionRepository.deleteById(FunctionId);
+    }
+    
+    public int findCodeFunctionByRole(String role_name, String function_name)
+    {
+
+        if( functionRepository.findFunctionCodeByRole(role_name,function_name)==null){
+            throw  new NotFoundException("role không có quyền truy cập api");
+        }
+        return  functionRepository.findFunctionCodeByRole(role_name,function_name).getCode();
     }
 
 
