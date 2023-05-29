@@ -17,9 +17,9 @@ import java.util.List;
 public class FunctionController {
     @Autowired
     private FunctionService functionService;
-    @PostMapping("/save")
-    public ResponseEntity createFunction(@RequestBody Function function) {
-        functionService.saveFunction(function);
+    @PostMapping("/save/{roleId}/function")
+    public ResponseEntity createFunction(@PathVariable Long roleId,@RequestBody Function function) {
+        functionService.saveFunction(roleId,function);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 

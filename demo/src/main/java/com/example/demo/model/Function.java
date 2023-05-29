@@ -28,7 +28,7 @@ public class Function {
     @JoinTable(name = "role_function",
             joinColumns = { @JoinColumn(name = "Function_ID") },
             inverseJoinColumns = { @JoinColumn(name = "Role_ID") })
-    @JsonIgnore
+
     private Set<Role> roles = new HashSet<>();
 
 

@@ -20,9 +20,9 @@ public class FunctionService {
     private RoleRepository roleRepository;
     @Autowired
     private AccountDetailService accountDetailService;
-    public Function saveFunction(Function function) {
+    public Function saveFunction(Long roleId, Function function) {
         Set<Role> roles = new HashSet<>();
-        Role role =roleRepository.findByName(accountDetailService.getCurrentUserRole().getName());
+        Role role =roleRepository.findById(roleId).orElse(null);
         System.out.println(role);
         roles.add(role);
         function.setRoles(roles);
