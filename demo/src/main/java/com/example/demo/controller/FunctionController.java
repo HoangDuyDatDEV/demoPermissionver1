@@ -12,16 +12,22 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("api/v1/function")
 public class FunctionController {
+
     @Autowired
     private FunctionService functionService;
-    @PostMapping("/save/{roleId}/function")
-    public ResponseEntity createFunction(@PathVariable Long roleId,@RequestBody Function function) {
-        functionService.saveFunction(roleId,function);
+    @PostMapping("/save")
+    public ResponseEntity createFunction(@RequestParam Long roleID,@RequestBody Function function) {
+        functionService.saveFunction(roleID,function);
         return new ResponseEntity(HttpStatus.CREATED);
     }
+//    @PutMapping("/update/{roleId}")
+//    public String UpdateFunction(@PathVariable Long roleId,@RequestBody Function function) {
+//        String id =functionService.UpdateFunction(roleId,function);
+//        return id;
+//    }
 
     @GetMapping(value = {"/getFunctions", "/{functionId}"})
     public List<Function> getFunctions(@PathVariable(required = false) Long functionId) {
@@ -33,8 +39,8 @@ public class FunctionController {
         functionService.deleteFunction(functionId);
         return new ResponseEntity(HttpStatus.OK);
     }
-    @GetMapping(value = {"/getFunction", "/roleName"})
-    public List<Function> getFunctionsByRole(@RequestParam String roleName) {
-        return functionService.findFunctionByRoleName(roleName);
+    @GetMapping(value = {"/getFunctionByRoleID"})
+    public List<Function> getFunctionsByRole(@RequestParam Long roleID) {
+        return functionService.findFunctionByRoleID(roleID);
     }
 }

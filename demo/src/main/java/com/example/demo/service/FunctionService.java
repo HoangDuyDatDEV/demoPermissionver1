@@ -29,6 +29,7 @@ public class FunctionService {
         return functionRepository.save(function);
     }
 
+
     public List<Function> getFunctionDetails(Long FunctionId) {
         if (null != FunctionId) {
             return functionRepository.findAllById(FunctionId);
@@ -38,6 +39,8 @@ public class FunctionService {
     }
 
     public void deleteFunction(Long FunctionId) {
+        this.functionRepository.deleteFunction(FunctionId);
+
         functionRepository.deleteById(FunctionId);
     }
 
@@ -50,7 +53,7 @@ public class FunctionService {
         return  functionRepository.findFunctionCodeByRole(role_name,function_name).getCode();
     }
 
-    public List<Function> findFunctionByRoleName(String role_name){
-        return functionRepository.findFunctionByRoleName(role_name);
+    public List<Function> findFunctionByRoleID(Long roleID){
+        return functionRepository.findFunctionByRoleID(roleID);
     }
 }

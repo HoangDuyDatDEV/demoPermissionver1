@@ -1,0 +1,80 @@
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label  class="form-label">Name</label>
+            <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" class="form-control" id="name" placeholder="Enter Name">            
+          </div>
+          <div class="mb-3">
+             <label for="code" class="form-label">Code</label>
+              <input type="text" [(ngModel)]="code" [ngModelOptions]="{standalone: true}" class="form-control" id="code" placeholder="Enter Code">
+          </div>
+          <div class="mb-3">
+             <label for="Url" class="form-label">Url</label>
+              <input type="text" [(ngModel)]="url" [ngModelOptions]="{standalone: true}" class="form-control" id="Url" placeholder="Enter Url">
+          </div>
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         <button type="submit" class="btn btn-primary" (click)="save()" >Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <div class="panel">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col col-sm-3 col-xs-12">
+              <h4 class="title">Data <span>Function</span></h4>
+            </div>
+            
+          </div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                   Add Function 
+            </button>
+        </div>
+        <div class="panel-body table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Url</th>
+                <th>#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let FunctionItem of FunctionArray">
+                <td >{{ FunctionItem.id }}</td>
+                <td>{{ FunctionItem.name | uppercase }}</td>
+                <td >{{ FunctionItem.code }}</td>
+                <td>{{ FunctionItem.url  }}</td>  
+                <td>
+                <button type="button" class="btn btn-danger" (click)="setDelete(FunctionItem)">Delete</button>
+                </td>              
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <div class="panel">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col col-sm-3 col-xs-12">
+              <h4 class="title">Data <span>Role</span></h4>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let RoleItem of RoleArray">
+                <td >{{ RoleItem.id }}</td>
+                <td>{{ RoleItem.name | uppercase }}</td>
+                <td>
+                 <a [routerLink]="['/function', RoleItem.id]" routerLinkActive="active">Xem chi tiết</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
