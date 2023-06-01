@@ -7,6 +7,7 @@ import com.example.demo.repository.FunctionRepository;
 import com.example.demo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +21,7 @@ public class FunctionService {
     private RoleRepository roleRepository;
     @Autowired
     private AccountDetailService accountDetailService;
-    public Function saveFunction(Long roleId, Function function) {
+    public Function saveFunction(@RequestParam Long roleId, Function function) {
         Set<Role> roles = new HashSet<>();
         Role role =roleRepository.findById(roleId).orElse(null);
         System.out.println(role);
@@ -39,7 +40,7 @@ public class FunctionService {
     }
 
     public void deleteFunction(Long FunctionId) {
-        this.functionRepository.deleteFunction(FunctionId);
+        this.functionRepository.deleteFunctionRole(FunctionId);
 
         functionRepository.deleteById(FunctionId);
     }

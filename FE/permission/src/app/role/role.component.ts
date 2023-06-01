@@ -15,6 +15,7 @@ export class RoleComponent  {
 RoleArray: any[]=[];
 isResultLoaded = false;
 roleID: number=0;
+name: string='';
 constructor(private http: HttpClient,
   private dmService: DanhmucService) {
   this.getAllRole();
@@ -25,6 +26,23 @@ viewRoleDetails(roleID: number) {
   console.log('View details of role with ID:', roleID);
   
 }
+register() {
+  let bodyData = {
+    name: this.name,
+  };
+  this.dmService
+    .registerRole(bodyData)
+    .subscribe((resultData: any) => {
+      console.log(resultData);
+      alert('Add Role Successfully');
+      this.getAllRole();
+      this.name = '';
+    });
+}
+
+save() {
+    this.register();  
+}
 getAllRole() {
   this.dmService
     .getAllRoles()
@@ -32,6 +50,23 @@ getAllRole() {
       this.isResultLoaded = true;
       console.log(resultData);
       this.RoleArray = resultData;
+    });
+    
+  
+
+}
+setDelete(data: any) {
+  this.dmService
+    .deleteRole(
+      data.id
+    )
+    .subscribe((resultData: any) => {
+      console.log(resultData);
+      alert('Role Deletedddd');
+      this.getAllRole();
+
+      this.name = '';
+    
     });
 }
 

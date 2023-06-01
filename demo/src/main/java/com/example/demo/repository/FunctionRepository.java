@@ -18,6 +18,6 @@ public interface FunctionRepository extends JpaRepository<Function,Long> {
    @Modifying
    @Transactional
    @Query(value = "DELETE FROM role_function WHERE function_id =:function_id ;", nativeQuery = true)
-   void deleteFunction(Long function_id);
+   void deleteFunctionRole(Long function_id);
 
 }

@@ -7,14 +7,17 @@ import com.example.demo.service.AccountDetailService;
 import com.example.demo.service.FunctionService;
 import com.example.demo.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("api/v1/role")
-@CrossOrigin
+
 public class RoleController {
     @Autowired
     private FunctionService functionService;
@@ -22,13 +25,23 @@ public class RoleController {
     private RoleService roleService;
     @Autowired
     private AccountDetailService accountDetailService;
-    @Autowired
-    private FunctionRepository functionRepository;
+
 
     @GetMapping("/getAllRoles")
     public List<Role> getAllRoles(){
         return roleService.getAllRoles();
     }
+    @PostMapping("/saveRole")
+    public ResponseEntity createRole(@RequestBody  Role role){
+        roleService.saveRole(role);
+        return new  ResponseEntity(HttpStatus.OK);
+    }
+    @DeleteMapping("/deleteRole/{roleId}")
+    public ResponseEntity removeFunction(@PathVariable Long roleId) {
+        roleService.deleteRole(roleId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
     // test phân quyền API
 

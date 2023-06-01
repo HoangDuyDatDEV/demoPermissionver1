@@ -26,4 +26,10 @@ export class DanhmucService {
   deleteFunction(id:any):Observable<any> {
     return this.http.delete('http://localhost:8087/api/v1/function/delete'+ '/' + id,{ responseType: 'text' } );
   }
+  deleteRole(roleID:any):Observable<any> {
+    return this.http.delete('http://localhost:8087/api/v1/role/deleteRole'+ '/' + roleID,{ responseType: 'text' } );
+  }
+  registerRole(Data:any):Observable<any> {
+    return this.http.post(`http://localhost:8087/api/v1/role/saveRole`,Data,{ responseType: 'text' })
+   }
 }
